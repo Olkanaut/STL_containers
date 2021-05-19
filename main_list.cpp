@@ -18,7 +18,6 @@ void	print_cont(T &cont)
 	typename T::iterator it = cont.begin();
 	while (it != cont.end())
 		std::cout << *it++ << "\t";
-	// std::cout << "\n\n";
 	std::cout << "\n";
 }
 
@@ -404,8 +403,8 @@ void	test_list_constructors()
 std::cout << YELLOW << "\n\n***--- LIST CONSTRUCTORS. TYPE: " << define_type(what_type()) << RESET << std::endl;
 
 std::cout << BLUE << "***------------------------- 0 list: init with 0" << RESET << std::endl;
-	std::list<T> as(5);		print_cont(as);
-	ft::list<T> af(5);		print_cont(af);
+	std::list<T> as(5);		//print_cont(as);
+	ft::list<T> af(5);		//print_cont(af);
 	std::cout << "Size 1: " << as.size() << "\nSize 2: " << af.size() << std::endl;
 
 std::cout << BLUE << "\n***------------------------- 1.1 list: Copy constructor" << RESET << std::endl;
@@ -867,7 +866,7 @@ void	test_unique_()
 	// double mydoubles[]={ 2.72, 3.14, 12.15, 12.77, 12.77, 15.3, 16.1, 72.25, 72.25, 73, 73.35 };
 	T mylist(mydoubles, mydoubles+11);
 
-	mylist.sort();
+	// mylist.sort();
 	print_cont(mylist);
 
 	mylist.unique();
@@ -1098,6 +1097,120 @@ std::cout << YELLOW << "\n\n***--- LIST: NON_MEMBER" << RESET << std::endl;
 	if (ft_a <= ft_b)	std::cout << BLUE << "a <= b" << RESET << "\n";
 	if (st_a < st_b)	std::cout << GREEN << "a < b" << RESET << "\t";
 	if (ft_a < ft_b)	std::cout << BLUE << "a < b" << RESET << "\n";
+
+}
+void	test_all_kinds_of_iters()
+{
+std::cout << YELLOW << "\n\n***--- LIST: ALL KIND OF ITERS" << RESET << std::endl;
+	std::cout << BLUE << "\n***------------------------- iters on normal obj" << RESET << std::endl;
+
+	ft::list<size_t> ft_list_s(5, 21);
+	std::list<size_t> std_list_s(5, 21);
+
+	ft::list<size_t>::iterator ft_it = ft_list_s.begin();
+	std::list<size_t>::iterator st_it = std_list_s.begin();
+
+	ft::list<size_t>::const_iterator ft_it_const = ft_list_s.begin();
+	std::list<size_t>::const_iterator st_it_const = std_list_s.begin();
+
+	ft::list<size_t>::reverse_iterator ft_it_r = ft_list_s.rbegin();
+	std::list<size_t>::reverse_iterator st_it_r = std_list_s.rbegin();
+
+	ft::list<size_t>::const_reverse_iterator ft_it_const_r = ft_list_s.rbegin();
+	std::list<size_t>::const_reverse_iterator st_it_const_r = std_list_s.rbegin();
+
+	*++ft_it = 5;
+	*++st_it = 5;
+
+	// *++ft_it_const = 5;// should not work
+	// *++st_it_const = 5;// should not work
+
+	std::cout << "ft_it_r: " << *ft_it_r << "\n";
+	std::cout << "st_it_r: " << *st_it_r << "\n---\n";
+	*++ft_it_r = 7;
+	*++st_it_r = 7;
+	std::cout << "ft_it_r: " << *ft_it_r << "\n";
+	std::cout << "st_it_r: " << *st_it_r << "\n---\n";
+
+	// *ft_it_const_r = 5;// should not work
+	// *st_it_const_r = 5;// should not work
+	std::cout << "ft_it_const_r: " << *ft_it_const_r << "\n";
+	std::cout << "st_it_const_r: " << *st_it_const_r << "\n---\n";
+	std::cout << "ft_it_const_r: " << *++ft_it_const_r << "\n";
+	std::cout << "st_it_const_r: " << *++st_it_const_r << "\n";
+	print_cont(ft_list_s);
+	print_cont(std_list_s);
+
+	std::cout << BLUE << "\n***------------------------- COPY constructors of iters on normal obj" << RESET << std::endl;
+
+	ft::list<size_t>::iterator ft_it_cpy(ft_it);
+	std::list<size_t>::iterator st_it_cpy(st_it);
+
+	ft::list<size_t>::const_iterator ft_it_const_cpy(ft_it_const);
+	std::list<size_t>::const_iterator st_it_const_cpy(st_it_const);
+
+	ft::list<size_t>::reverse_iterator ft_it_r_cpy(ft_it_r);
+	std::list<size_t>::reverse_iterator st_it_r_cpy(st_it_r);
+
+	ft::list<size_t>::const_reverse_iterator ft_it_const_r_cpy(ft_it_const_r);
+	std::list<size_t>::const_reverse_iterator st_it_const_r_cpy(st_it_const_r);
+
+	std::cout << *ft_it_cpy << " " << *st_it_cpy << "\n";
+	std::cout << *ft_it_const_cpy << " " << *st_it_const_cpy << "\n";
+	std::cout << *ft_it_r_cpy << " " << *st_it_r_cpy << "\n";
+	std::cout << *ft_it_const_r_cpy << " " << *st_it_const_r_cpy << "\n";
+
+
+	std::cout << BLUE << "\n***------------------------- iters on CONST obj" << RESET << std::endl;
+
+	ft::list<size_t> const ft_const_X(ft_list_s);
+	std::list<size_t> const std_const_X(std_list_s);
+
+	// ft::list<size_t>::iterator ft_it_X = ft_const_X.begin();// should not work
+	// std::list<size_t>::iterator st_it_X = std_const_X.begin();// should not work
+
+	ft::list<size_t>::const_iterator ft_it_const_X = ft_const_X.begin();
+	std::list<size_t>::const_iterator st_it_const_X = std_const_X.begin();
+
+	// ft::list<size_t>::reverse_iterator ft_it_X_r = ft_const_X.rbegin();// same as std: should not work
+	// std::list<size_t>::reverse_iterator st_it_X_r = std_const_X.rbegin();// same as std: should not work
+
+	ft::list<size_t>::const_reverse_iterator ft_it_const_X_r = ft_const_X.rbegin();
+	std::list<size_t>::const_reverse_iterator st_it_const_X_r = std_const_X.rbegin();
+
+	// // *++ft_it_X = 5;// should not work
+	// // *++st_it_X = 5;// should not work
+
+	// // *++ft_it_const_X = 5;// should not work
+	// // *++st_it_const_X = 5;// should not work
+
+	std::cout << "ft_it_const_X: " << *ft_it_const_X << "\n";
+	std::cout << "st_it_const_X: " << *st_it_const_X << "\n---\n";
+	std::cout << "ft_it_const_X: " << *++ft_it_const_X << "\n";
+	std::cout << "st_it_const_X: " << *++st_it_const_X << "\n---\n";
+
+	// *++ft_it_X_r = 8;// same as std: should not work
+	// *++st_it_X_r = 8;// same as std: should not work
+
+	// // *++ft_it_const_X_r = 5;// should not work
+	// // *++st_it_const_X_r = 5;// should not work
+	std::cout << "ft_it_const_X_r: " << *ft_it_const_X_r << "\n";
+	std::cout << "st_it_const_X_r: " << *st_it_const_X_r << "\n---\n";
+	std::cout << "ft_it_const_X_r: " << *++ft_it_const_X_r << "\n";
+	std::cout << "st_it_const_X_r: " << *++st_it_const_X_r << "\n---\n";
+	print_cont(ft_const_X);
+	print_cont(std_const_X);
+
+	std::cout << BLUE << "\n***------------------------- COPY constructors of iters on const obj" << RESET << std::endl;
+
+	ft::list<size_t>::const_iterator ft_it_const_X_cpy(ft_it_const_X);
+	std::list<size_t>::const_iterator st_it_const_X_cpy(st_it_const_X);
+
+	ft::list<size_t>::const_reverse_iterator ft_it_const_X_r_cpy(ft_it_const_X_r);
+	std::list<size_t>::const_reverse_iterator st_it_const_X_r_cpy(st_it_const_X_r);
+
+	std::cout << *ft_it_const_X_cpy << " " << *st_it_const_X_cpy << "\n";
+	std::cout << *ft_it_const_X_r_cpy << " " << *st_it_const_X_r_cpy << "\n";
 }
 
 int main()
@@ -1110,6 +1223,7 @@ std::cout << GREEN << "\n\n***--- LIST CONSTRUCTORS" << RESET << std::endl;
 
 std::cout << GREEN << "\n\n***--- LIST ITERATORS" << RESET << std::endl;
 	test_list_iterators();
+	test_all_kinds_of_iters();
 
 	test_contents();
 
@@ -1125,7 +1239,7 @@ std::cout << GREEN << "\n\n***--- LIST ITERATORS" << RESET << std::endl;
 	test_swap<int>();
 	test_swap<char>();
 
-	test_splice<int>(); // test_splice<char>();
+	test_splice<int>();
 
 	test_remove<int>();
 

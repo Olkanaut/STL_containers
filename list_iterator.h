@@ -19,12 +19,17 @@ struct List_iterator
 
 	_node_type	*_node;
 
-	List_iterator() : _node() { }
+	List_iterator() : _node() {}
 
-	explicit List_iterator(_node_type* node) : _node(node) { }
+	explicit List_iterator(_node_type* node) : _node(node) {}
 
-	// _List_const_iterator(const iterator& __x) _GLIBCXX_NOEXCEPT
-	// : _M_node(__x._M_node) { }
+	List_iterator(const List_iterator & src) : _node(src._node) {}
+	List_iterator &operator=(const List_iterator & src)
+	{
+		this->_node = src._node;
+		return *this;
+	}
+
 
 	// iterator
 	// _M_const_cast() const _GLIBCXX_NOEXCEPT
@@ -97,12 +102,16 @@ struct List_const_iterator
 
 	const _node_type	*_node;
 
-	List_const_iterator() : _node() { }
+	List_const_iterator() : _node() {}
 
-	explicit List_const_iterator(const _node_type* node) : _node(node) { }
+	explicit List_const_iterator(const _node_type* node) : _node(node) {}
 
-	List_const_iterator(const iterator & x)
-	: _node(x._node) { }
+	List_const_iterator(const iterator & x) : _node(x._node) {}
+	List_const_iterator & operator=(const List_const_iterator & src)
+	{
+		this->_node = src._node;
+		return *this;
+	}
 
 	// iterator
 	// _M_const_cast() const _GLIBCXX_NOEXCEPT

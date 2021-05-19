@@ -4,7 +4,7 @@
 #include "list_node.h"
 
 template<typename Iter_type>
-struct List_reverse_iterator
+struct List_reverse_iterator : public Iter_type
 {
 protected:
 	Iter_type	current;
@@ -22,15 +22,32 @@ public:
 	// typedef const Iter_type*				const_pointer;//
 	// typedef const Iter_type&				const_reference;//
 
-	List_reverse_iterator() : current() { }
+	List_reverse_iterator() : Iter_type() { }
+	List_reverse_iterator(Iter_type const & it) : Iter_type(it), current(it) { }//
+	List_reverse_iterator(List_reverse_iterator const & src) : Iter_type(src.current), current(src.base()) {}
+	List_reverse_iterator &operator=(List_reverse_iterator const & src)
+	{
+		this->current = src.current;
+		return *this;
+	}
 
-	explicit List_reverse_iterator(Iter_type iter) : current(iter) { }
+    template <class _Up>
+        List_reverse_iterator( const List_reverse_iterator<_Up> & src) : Iter_type(src.base()), current(src.base()) {}
+// Iter_type(src.current),
+        // List_reverse_iterator( List_reverse_iterator<_Up> const & src) : current(src.base()) {}
+        // List_reverse_iterator(const List_reverse_iterator<_Up>& src) : Iter_type(src.current) {}
+
+
+	// explicit List_reverse_iterator(Iter_type iter) : current(iter) { }
 
       /**
        *  The copy constructor is normal.
       */
 	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.current) { }
+	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.current) { }
 	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.base()) { }
+
+
 
 	// List_reverse_iterator& operator=(const List_reverse_iterator & src) = default;
 
@@ -39,16 +56,28 @@ public:
     //    *  underlying %iterator can be converted to the type of @c current.
     //   */
 	// template<typename Iter_type>
-	List_reverse_iterator(const List_reverse_iterator<Iter_type>& x)
-	: current(x.base()) { };
+	// List_reverse_iterator(const List_reverse_iterator<Iter_type>& x)
+	// : current(x.base()) { };
 
 	Iter_type base() const { return current; }
 
+
 //operator= ? // <> >= <= + -
+	reference operator*()
+	{
+		Iter_type tmp = current;
+		return *--tmp;
+	}
+
 	reference operator*() const//const?
 	{
 		Iter_type tmp = current;
 		return *--tmp;
+	}
+
+	pointer operator->()
+	{
+		return &(operator*());
 	}
 
 	pointer operator->() const
