@@ -225,7 +225,7 @@ template<typename T>
 void	list_test_push_front(T & cont, int n, ft::str_type)
 {
 	for (int i = 110; i < 110 + n; ++i)
-		cont.push_back(ft::to_string(i, 10));
+		cont.push_front(ft::to_string(i, 10));
 	print_cont(cont);
 }
 
@@ -684,20 +684,24 @@ void	test_erase_(int delta)
 	T mylist;
 	typename T::iterator it1,it2;
 	for (int i=97; i<107; ++i) mylist.push_back(i);
+	print_cont(mylist);
+
 	it1 = it2 = mylist.begin();
-	// for (int i=0; i<delta; i++) it2++;
-	std::advance (it2,delta);
+	std::advance (it2,delta);// for (int i=0; i<delta; i++) it2++;
 	++it1;
+
+	std::cout << "before: " << "it1: " << *it1 << "\tit2: " << *it2 << std::endl;
 	it1 = mylist.erase (it1);
 	it2 = mylist.erase (it2);
-
+	std::cout << "after:  it1: " << *it1 << "\tit2: " << *it2 << std::endl;
 	print_cont(mylist);
-	std::cout << "it1: " << *it1 << " it2: " << *it2 << std::endl;
+
 	++it1;
 	--it2;
-	std::cout << "it1: " << *it1 << " it2: " << *it2 << std::endl;
 
+	std::cout << "before: " << "it1: " << *it1 << "\tit2: " << *it2 << std::endl;
 	mylist.erase (it1,it2);
+	std::cout << "after:  it1: " << *it1 << "\tit2: " << *it2 << std::endl;
 	print_cont(mylist);
 	std::cout << "\n";
 }
@@ -1131,7 +1135,6 @@ std::cout << YELLOW << "\n\n***--- LIST: ALL KIND OF ITERS" << RESET << std::end
 	*++st_it_r = 7;
 	std::cout << "ft_it_r: " << *ft_it_r << "\n";
 	std::cout << "st_it_r: " << *st_it_r << "\n---\n";
-
 	// *ft_it_const_r = 5;// should not work
 	// *st_it_const_r = 5;// should not work
 	std::cout << "ft_it_const_r: " << *ft_it_const_r << "\n";
@@ -1155,10 +1158,10 @@ std::cout << YELLOW << "\n\n***--- LIST: ALL KIND OF ITERS" << RESET << std::end
 	ft::list<size_t>::const_reverse_iterator ft_it_const_r_cpy(ft_it_const_r);
 	std::list<size_t>::const_reverse_iterator st_it_const_r_cpy(st_it_const_r);
 
-	std::cout << *ft_it_cpy << " " << *st_it_cpy << "\n";
-	std::cout << *ft_it_const_cpy << " " << *st_it_const_cpy << "\n";
-	std::cout << *ft_it_r_cpy << " " << *st_it_r_cpy << "\n";
-	std::cout << *ft_it_const_r_cpy << " " << *st_it_const_r_cpy << "\n";
+	std::cout << *ft_it_cpy << "\t" << *st_it_cpy << "\n";
+	std::cout << *ft_it_const_cpy << "\t" << *st_it_const_cpy << "\n";
+	std::cout << *ft_it_r_cpy << "\t" << *st_it_r_cpy << "\n";
+	std::cout << *ft_it_const_r_cpy << "\t" << *st_it_const_r_cpy << "\n";
 
 
 	std::cout << BLUE << "\n***------------------------- iters on CONST obj" << RESET << std::endl;
@@ -1209,8 +1212,8 @@ std::cout << YELLOW << "\n\n***--- LIST: ALL KIND OF ITERS" << RESET << std::end
 	ft::list<size_t>::const_reverse_iterator ft_it_const_X_r_cpy(ft_it_const_X_r);
 	std::list<size_t>::const_reverse_iterator st_it_const_X_r_cpy(st_it_const_X_r);
 
-	std::cout << *ft_it_const_X_cpy << " " << *st_it_const_X_cpy << "\n";
-	std::cout << *ft_it_const_X_r_cpy << " " << *st_it_const_X_r_cpy << "\n";
+	std::cout << *ft_it_const_X_cpy << " " << *ft_it_const_X_r_cpy << "\n";
+	std::cout << *st_it_const_X_cpy << " " << *st_it_const_X_r_cpy << "\n";
 }
 
 int main()

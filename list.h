@@ -25,20 +25,11 @@ public:
 	typedef	typename Alloc::difference_type 	difference_type;//	Signed integer type (usually std::ptrdiff_t)
 	typedef	typename Alloc::size_type			size_type;
 
-// For every iterator type It, a typedef std::iterator_traits<It>::iterator_category is available
-	// typedef std::iterator_traits<iterator>::iterator_category();
-	// typedef std::iterator<std::bidirectional_iterator_tag, T, __gnu_cxx::ptrdiff_t, const T*, const T&>		iterator;
-	// typedef const std::iterator<std::bidirectional_iterator_tag, T, __gnu_cxx::ptrdiff_t, const T*, const T&>	const_iterator;
-	// typedef std::iterator<std::bidirectional_iterator_tag, T, std::ptrdiff_t, const T*, const T&>		iterator;
-	// typedef const std::iterator<std::bidirectional_iterator_tag, T, std::ptrdiff_t, const T*, const T&>	const_iterator;
-	// typedef LegacyBidirectionalIterator				iterator;
-	// typedef LegacyBidirectionalIterator				const_iterator;
-
-	typedef List_iterator<T>						iterator;
-	typedef List_const_iterator<T>					const_iterator;
-	typedef List_reverse_iterator<iterator>			reverse_iterator;
-	typedef List_reverse_iterator<const_iterator>	const_reverse_iterator;
-	// typedef const List_reverse_iterator<iterator>	const_reverse_iterator;
+	typedef list_iterator<T>						iterator;
+	typedef list_const_iterator<T>					const_iterator;
+	typedef list_reverse_iterator<iterator>			reverse_iterator;
+	typedef list_reverse_iterator<const_iterator>	const_reverse_iterator;
+	// typedef const list_reverse_iterator<iterator>	const_reverse_iterator;
 	// typedef List_const_reverse_iterator<const_iterator>	const_reverse_iterator;///
 	// typedef List_const_reverse_iterator<iterator>	const_reverse_iterator;///
 
@@ -606,26 +597,22 @@ public:
 	}
 
 	template< class T, class Alloc >
-	bool operator<=(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y)
-	{
+	bool operator<=(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y){
 		return !(y < x);
 	}
 
 	template< class T, class Alloc >
-	bool operator>(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y)
-	{
+	bool operator>(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y){
 		return y < x;
 	}
 
 	template< class T, class Alloc >
-	bool operator>=(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y)
-	{
+	bool operator>=(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y){
 		return !(x < y);
 	}
 
 	template< class T, class Alloc >
-	void swap(ft::list<T, Alloc> & x, ft::list<T, Alloc> & y)
-	{
+	void swap(ft::list<T, Alloc> & x, ft::list<T, Alloc> & y){
 		x.swap(y);
 	}
 }

@@ -6,9 +6,9 @@
 namespace ft
 {
 template<typename T>
-struct List_iterator
+struct list_iterator
 {
-	typedef List_iterator<T>	_Self;
+	typedef list_iterator<T>	_Self;
 	typedef Node<T>				_node_type;
 
 	typedef std::ptrdiff_t					difference_type;
@@ -19,12 +19,12 @@ struct List_iterator
 
 	_node_type	*_node;
 
-	List_iterator() : _node() {}
+	list_iterator() : _node() {}
 
-	explicit List_iterator(_node_type* node) : _node(node) {}
+	explicit list_iterator(_node_type* node) : _node(node) {}
 
-	List_iterator(const List_iterator & src) : _node(src._node) {}
-	List_iterator &operator=(const List_iterator & src)
+	list_iterator(const list_iterator & src) : _node(src._node) {}
+	list_iterator &operator=(const list_iterator & src)
 	{
 		this->_node = src._node;
 		return *this;
@@ -76,23 +76,19 @@ struct List_iterator
 		return tmp;
 	}
 
-	List_iterator operator+(int) { return List_iterator(this->_node->_next); }//
-	List_iterator operator-(int) { return List_iterator(this->_node->_prev); }//
+	list_iterator operator+(int) { return list_iterator(this->_node->_next); }//
+	list_iterator operator-(int) { return list_iterator(this->_node->_prev); }//
 
-
-	friend bool operator==(const _Self & x, const _Self & y)
-	{ return x._node == y._node; }
-
-	friend bool operator!=(const _Self & x, const _Self & y)
-	{ return x._node != y._node; }
+	friend bool operator==(const _Self & x, const _Self & y) { return x._node == y._node; }
+	friend bool operator!=(const _Self & x, const _Self & y) { return x._node != y._node; }
 };
 
 template<typename T>
-struct List_const_iterator
+struct list_const_iterator
 {
-	typedef List_const_iterator<T>	_Self;
+	typedef list_const_iterator<T>	_Self;
 	typedef const Node<T>			_node_type;
-	typedef List_iterator<T>		iterator;///
+	typedef list_iterator<T>		iterator;///
 
 	typedef std::ptrdiff_t					difference_type;
 	typedef std::bidirectional_iterator_tag	iterator_category;
@@ -102,12 +98,12 @@ struct List_const_iterator
 
 	const _node_type	*_node;
 
-	List_const_iterator() : _node() {}
+	list_const_iterator() : _node() {}
 
-	explicit List_const_iterator(const _node_type* node) : _node(node) {}
+	explicit list_const_iterator(const _node_type* node) : _node(node) {}
 
-	List_const_iterator(const iterator & x) : _node(x._node) {}
-	List_const_iterator & operator=(const List_const_iterator & src)
+	list_const_iterator(const iterator & x) : _node(x._node) {}
+	list_const_iterator & operator=(const list_const_iterator & src)
 	{
 		this->_node = src._node;
 		return *this;

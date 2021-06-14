@@ -4,13 +4,13 @@
 #include "list_node.h"
 
 template<typename Iter_type>
-struct List_reverse_iterator : public Iter_type
+struct list_reverse_iterator : public Iter_type
 {
 protected:
 	Iter_type	current;
 
 public:
-	typedef List_reverse_iterator<Iter_type>	_Self;
+	typedef list_reverse_iterator<Iter_type>	_Self;
 
 	typedef Iter_type								iterator_type;//
 	typedef typename Iter_type::difference_type		difference_type;
@@ -22,41 +22,41 @@ public:
 	// typedef const Iter_type*				const_pointer;//
 	// typedef const Iter_type&				const_reference;//
 
-	List_reverse_iterator() : Iter_type() { }
-	List_reverse_iterator(Iter_type const & it) : Iter_type(it), current(it) { }//
-	List_reverse_iterator(List_reverse_iterator const & src) : Iter_type(src.current), current(src.base()) {}
-	List_reverse_iterator &operator=(List_reverse_iterator const & src)
+	list_reverse_iterator() : Iter_type() { }
+	list_reverse_iterator(Iter_type const & it) : Iter_type(it), current(it) { }//
+	list_reverse_iterator(list_reverse_iterator const & src) : Iter_type(src.current), current(src.base()) {}
+	list_reverse_iterator &operator=(list_reverse_iterator const & src)
 	{
 		this->current = src.current;
 		return *this;
 	}
 
     template <class _Up>
-        List_reverse_iterator( const List_reverse_iterator<_Up> & src) : Iter_type(src.base()), current(src.base()) {}
+        list_reverse_iterator( const list_reverse_iterator<_Up> & src) : Iter_type(src.base()), current(src.base()) {}
 // Iter_type(src.current),
-        // List_reverse_iterator( List_reverse_iterator<_Up> const & src) : current(src.base()) {}
-        // List_reverse_iterator(const List_reverse_iterator<_Up>& src) : Iter_type(src.current) {}
+        // list_reverse_iterator( list_reverse_iterator<_Up> const & src) : current(src.base()) {}
+        // list_reverse_iterator(const list_reverse_iterator<_Up>& src) : Iter_type(src.current) {}
 
 
-	// explicit List_reverse_iterator(Iter_type iter) : current(iter) { }
+	// explicit list_reverse_iterator(Iter_type iter) : current(iter) { }
 
       /**
        *  The copy constructor is normal.
       */
-	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.current) { }
-	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.current) { }
-	// List_reverse_iterator(const List_reverse_iterator & src) : current(src.base()) { }
+	// list_reverse_iterator(const list_reverse_iterator & src) : current(src.current) { }
+	// list_reverse_iterator(const list_reverse_iterator & src) : current(src.current) { }
+	// list_reverse_iterator(const list_reverse_iterator & src) : current(src.base()) { }
 
 
 
-	// List_reverse_iterator& operator=(const List_reverse_iterator & src) = default;
+	// list_reverse_iterator& operator=(const list_reverse_iterator & src) = default;
 
     //   /**
     //    *  A %reverse_iterator across other types can be copied if the
     //    *  underlying %iterator can be converted to the type of @c current.
     //   */
 	// template<typename Iter_type>
-	// List_reverse_iterator(const List_reverse_iterator<Iter_type>& x)
+	// list_reverse_iterator(const list_reverse_iterator<Iter_type>& x)
 	// : current(x.base()) { };
 
 	Iter_type base() const { return current; }
@@ -144,16 +144,18 @@ public:
 	// bool operator!=(const _Self & x, const _Self & y)
 	// { return x.base() != y.base(); }
 
-	// bool operator==(const _Self & x)
-	// { return current == x.base(); }
+	bool operator==(const _Self & x)
+	{ return current == x.base(); }
 
-	// bool operator!=(const _Self & x)
-	// { return current != x.base(); }
+	bool operator!=(const _Self & x)
+	{ return current != x.base(); }
 	// operator< > <= >=
 
-	friend bool operator==(const _Self & x, const _Self & y)
-	{ return x.current == y.current; }
 
-	friend bool operator!=(const _Self & x, const _Self & y)
-	{ return x.current != y.current; }
+
+	// friend bool operator==(const _Self & x, const _Self & y)
+	// { return x.current == y.current; }
+
+	// friend bool operator!=(const _Self & x, const _Self & y)
+	// { return x.current != y.current; }
 };
