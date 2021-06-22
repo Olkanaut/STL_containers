@@ -140,6 +140,7 @@ void	fill_list(ft::list<T> & list, int num)
 
 void	fill_list(ft::list<temp> & list, int num)
 {
+	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
 	for (int i = 0; i < 3; i++)
 		list.push_back(array[i]);
@@ -147,6 +148,7 @@ void	fill_list(ft::list<temp> & list, int num)
 
 void	fill_list(std::list<temp> & list, int num)
 {
+	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
 	for (int i = 0; i < 3; i++)
 		list.push_back(array[i]);
@@ -154,6 +156,7 @@ void	fill_list(std::list<temp> & list, int num)
 
 void	fill_list(ft::list<std::string> & list, int num)
 {
+	(void)num;
 	std::string array[] = {"aaa", "bbb", "ccc"};
 	for (int i = 0; i < 3; i++)
 		list.push_back(array[i]);
@@ -161,6 +164,7 @@ void	fill_list(ft::list<std::string> & list, int num)
 
 void	fill_list(std::list<std::string> & list, int num)
 {
+	(void)num;
 	std::string array[] = {"aaa", "bbb", "ccc"};
 	for (int i = 0; i < 3; i++)
 		list.push_back(array[i]);

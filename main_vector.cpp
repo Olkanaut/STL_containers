@@ -143,6 +143,7 @@ void	fill_vector(ft::vector<T> & vector, int num)
 
 void	fill_vector(ft::vector<temp> & vector, int num)
 {
+	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
 	for (int i = 0; i < 3; i++)
 		vector.push_back(array[i]);
@@ -150,6 +151,7 @@ void	fill_vector(ft::vector<temp> & vector, int num)
 
 void	fill_vector(std::vector<temp> & vector, int num)
 {
+	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
 	for (int i = 0; i < 3; i++)
 		vector.push_back(array[i]);
@@ -157,6 +159,7 @@ void	fill_vector(std::vector<temp> & vector, int num)
 
 void	fill_vector(ft::vector<std::string> & vector, int num)
 {
+	(void)num;
 	std::string array[] = {"aaa", "bbb", "ccc"};
 	for (int i = 0; i < 3; i++)
 		vector.push_back(array[i]);
@@ -164,6 +167,7 @@ void	fill_vector(ft::vector<std::string> & vector, int num)
 
 void	fill_vector(std::vector<std::string> & vector, int num)
 {
+	(void)num;
 	std::string array[] = {"aaa", "bbb", "ccc"};
 	for (int i = 0; i < 3; i++)
 		vector.push_back(array[i]);
@@ -475,9 +479,9 @@ template < typename T >
 void	test_insert_2args_reg()
 {
 	typedef typename ft::what_type<T>::type what_type;
-std::cout << YELLOW << "\n\n***--- vector INSERT. TYPE: " << define_type(what_type()) << RESET << std::endl;
+std::cout << GREEN << "\n\n***--- vector INSERT. TYPE: " << define_type(what_type()) << RESET << std::endl;
 
-std::cout << "\n***------------------------- 0 vector: original containers" << std::endl;
+std::cout << BLUE << "\n***------------------------- 0 vector: original containers" << RESET << std::endl;
 	std::vector<T> std_1;
 	fill_vector(std_1, 5);
 	print_cont(std_1);
@@ -486,7 +490,7 @@ std::cout << "\n***------------------------- 0 vector: original containers" << s
 	fill_vector(ft_1, 5);
 	print_cont(ft_1);
 
-std::cout << "\n***------------------------- 1.1 vector: INSERT at second pos" << std::endl;
+std::cout << BLUE << "\n***------------------------- 1.1 vector: INSERT at second pos" << RESET << std::endl;
 	typename std::vector<T>::iterator std_it1 = std_1.begin();
 	std_it1++; std_it1++;
 	std_1.insert(std_it1, 63);
@@ -497,7 +501,7 @@ std::cout << "\n***------------------------- 1.1 vector: INSERT at second pos" <
 	ft_1.insert(ft_it1, 63);
 	print_cont(ft_1);
 
-std::cout << "\n***------------------------- 1.2 vector: INSERT at begin pos" << std::endl;
+std::cout << BLUE << "\n***------------------------- 1.2 vector: INSERT at begin pos" << RESET << std::endl;
 	typename std::vector<T>::iterator std_it0 = std_1.begin();
 	std_1.insert(std_it0, 35);
 	print_cont(std_1);
@@ -506,7 +510,7 @@ std::cout << "\n***------------------------- 1.2 vector: INSERT at begin pos" <<
 	ft_1.insert(ft_it0, 35);
 	print_cont(ft_1);
 
-// std::cout << "\n***------------------------- 1.1 vector: INSERT at begin-- pos" << std::endl;
+// std::cout << BLUE << "\n***------------------------- 1.1 vector: INSERT at begin-- pos" << RESET << std::endl;
 // 	typename std::vector<T>::iterator std_it00 = std_1.begin();
 // 	for (int i = 0; i < 11 ; i++)
 // 		std_it00--;
@@ -519,7 +523,7 @@ std::cout << "\n***------------------------- 1.2 vector: INSERT at begin pos" <<
 // 	ft_1.insert(ft_it00, -5);
 // 	print_cont(ft_1);
 
-std::cout << "\n***------------------------- 1.3 vector: INSERT at end pos" << std::endl;
+std::cout << BLUE << "\n***------------------------- 1.3 vector: INSERT at end pos" << RESET << std::endl;
 	typename std::vector<T>::iterator std_it_end = std_1.end();
 	std_1.insert(std_it_end, 39);
 	print_cont(std_1);
@@ -528,7 +532,7 @@ std::cout << "\n***------------------------- 1.3 vector: INSERT at end pos" << s
 	ft_1.insert(ft_it_end, 39);
 	print_cont(ft_1);
 
-// // std::cout << "\n***------------------------- 1.1 vector: INSERT at end++ pos" << std::endl;
+// // std::cout << BLUE << "\n***------------------------- 1.1 vector: INSERT at end++ pos" << RESET << std::endl;
 // // 	std_it_end++;
 // // 	ft_it_end++;
 // // 	std_1.insert(std_it_end, 9);
@@ -575,29 +579,29 @@ template < typename T >
 void	vectorvectorTest_insert_range2args()
 {
 	typedef typename ft::what_type<T>::type what_type;
-std::cout << YELLOW << "\n\n***--- vector RANGE 2 ITERS. TYPE: " << define_type(what_type()) << RESET << std::endl;
+std::cout << GREEN << "\n\n***--- vector RANGE 2 ITERS. TYPE: " << define_type(what_type()) << RESET << std::endl;
 
-	std::cout << "\n***------------------------- valid range in source and in dest" << std::endl;
+	std::cout << BLUE << "\n***------------------------- valid range in source and in dest" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(5, 3);
 	vector_insert_range<ft::vector<T>, T>(5, 3);
 
-	std::cout << "\n***------------------------- range in sourse is empty" << std::endl;
+	std::cout << BLUE << "\n***------------------------- range in sourse is empty" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(2, 5);
 	vector_insert_range<ft::vector<T>, T>(2, 5);
 
-	std::cout << "\n***------------------------- one elem in dest" << std::endl;
+	std::cout << BLUE << "\n***------------------------- one elem in dest" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(5, 1);
 	vector_insert_range<ft::vector<T>, T>(5, 1);//
 
-	std::cout << "\n***------------------------- source is empty" << std::endl;
+	std::cout << BLUE << "\n***------------------------- source is empty" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(0, 4);
 	vector_insert_range<ft::vector<T>, T>(0, 4);
 
-	std::cout << "\n***------------------------- dest is empty, insert 1 node" << std::endl;
+	std::cout << BLUE << "\n***------------------------- dest is empty, insert 1 node" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(3, 0);//
 	vector_insert_range<ft::vector<T>, T>(3, 0);//differs
 
-	std::cout << "\n***------------------------- dest is empty, insert >1 nodes" << std::endl;
+	std::cout << BLUE << "\n***------------------------- dest is empty, insert >1 nodes" << RESET << std::endl;
 	vector_insert_range<std::vector<T>, T>(5, 0);//
 	vector_insert_range<ft::vector<T>, T>(5, 0);//
 }
@@ -635,31 +639,70 @@ template < typename T >
 void vectorTest_insert_range3args()
 {
 	typedef typename ft::what_type<T>::type what_type;
-std::cout << YELLOW << "\n\n***--- vector RANGE 3 ARGS. TYPE: " << define_type(what_type()) << RESET << std::endl;
+std::cout << GREEN << "\n\n***--- vector RANGE 3 ARGS. TYPE: " << define_type(what_type()) << RESET << std::endl;
 
-	std::cout << "\n***------------------------- normal case 1" << std::endl;
+	std::cout << BLUE << "\n***------------------------- normal case 1" << RESET << std::endl;
 	vector_insert_range_3args<std::vector<T> >(5, 3, 111);
 	vector_insert_range_3args<ft::vector<T> >(5, 3, 111);
 
-	std::cout << "\n***------------------------- normal case 2: insert 1 elem" << std::endl;
+	std::cout << BLUE << "\n***------------------------- normal case 2: insert 1 elem" << RESET << std::endl;
 	vector_insert_range_3args<std::vector<T> >(4, 1, 111);
 	vector_insert_range_3args<ft::vector<T> >(4, 1, 111);
 
-	std::cout << "\n***------------------------- normal case 3" << std::endl;
+	std::cout << BLUE << "\n***------------------------- normal case 3" << RESET << std::endl;
 	vector_insert_range_3args<std::vector<T> >(1, 3, 111);
 	vector_insert_range_3args<ft::vector<T> >(1, 3, 111);
 
-	std::cout << "\n***------------------------- insert 0 elems" << std::endl;
+	std::cout << BLUE << "\n***------------------------- insert 0 elems" << RESET << std::endl;
 	vector_insert_range_3args<std::vector<T> >(5, 0, 111);
 	vector_insert_range_3args<ft::vector<T> >(5, 0, 111);
 
-	std::cout << "\n***------------------------- insert to empty container" << std::endl;
+	std::cout << BLUE << "\n***------------------------- insert to empty container" << RESET << std::endl;
 	vector_insert_range_3args<std::vector<T> >(0, 3, 111);
 	vector_insert_range_3args<ft::vector<T> >(0, 3, 111);
 
-	std::cout << "\n***------------------------- insert from itself" << std::endl;
+	std::cout << BLUE << "\n***------------------------- insert from itself" << RESET << std::endl;
 	vector_test_insert_itself<ft::vector<T>, T >();
 	vector_test_insert_itself<std::vector<T>, T >();
+}
+
+template < typename T >
+void	test_insert_iterators()
+{
+	T vec_dst(5, "a");
+	T vec_src;
+	for (int i = 0; i < 5; ++i)
+		vec_src.push_back(ft::to_string(i, 10));
+
+	std::cout << "dest:  "; print_cont(vec_dst);
+	std::cout << "src:   "; print_cont(vec_src);
+
+	typename T::iterator it = vec_dst.begin(); ++it;
+
+std::cout << BLUE << "***--- insert 1 value" << RESET << std::endl;
+	vec_dst.insert(it, "c");
+	std::cout << "src:\t"; print_cont(vec_dst);
+
+std::cout << BLUE << "***--- insert range between inters" << RESET << std::endl;
+	typename T::iterator it1 = vec_dst.begin(); ++it1;
+	typename T::iterator it_src_b = vec_src.begin(); std::advance(it_src_b, 2);
+	typename T::iterator it_src_e = vec_src.end();   std::advance(it_src_e, -1);//--it_src_e;
+	vec_dst.insert(it1, it_src_b, it_src_e);
+	std::cout << "st:     ";	print_cont(vec_dst);
+
+std::cout << BLUE << "***--- insert range between inters from self" << RESET << std::endl;
+	typename T::iterator it_b = vec_dst.begin(); std::advance(it_b, 2);   //for (int i = 0; i < 3; i++) ++it_b;//	vecd::advance(it_b, 3);
+	typename T::iterator it_e = vec_dst.end();   std::advance(it_e, -2); //for (int i = 0; i < 7; i++) --it_e;	//	std::advance(it_e, -7);
+	it1 = vec_dst.begin(); ++it1;
+
+	vec_dst.insert(it1, it_b, it_e);
+	print_cont(vec_dst);
+
+std::cout << BLUE << "***--- insert 3 args, 1 iter" << RESET << std::endl;
+	typename T::iterator it_b1 = vec_dst.begin();	std::advance(it_b1, 3);
+	vec_dst.insert(it_b1, 4, "rrr");
+	print_cont(vec_dst);
+	std::cout << "---------\n\n";
 }
 
 void vector_test_insert()
@@ -674,6 +717,10 @@ std::cout << GREEN << "\n\n***--- vector INSERT" << RESET << std::endl;
 
 	vectorTest_insert_range3args<int>();
 	vectorTest_insert_range3args<char>();
+
+std::cout << GREEN << "***--- vector INSERT test with iterators" << RESET << std::endl;
+	test_insert_iterators<std::vector<std::string> >();
+	test_insert_iterators<ft::vector<std::string> >();
 }
 
 template < typename T>
@@ -682,7 +729,6 @@ void	test_erase_(int delta)
 	T myvector;
 	typename T::iterator it1,it2;
 	for (int i=97; i<107; ++i) myvector.push_back(i);
-	// for (int i=1; i<11; ++i) myvector.push_back(i);
 	print_cont(myvector);
 
 	it1 = it2 = myvector.begin();
@@ -740,7 +786,7 @@ template <typename T>
 void	test_swap()
 {
 	typedef typename ft::what_type<T>::type what_type;
-std::cout << YELLOW << "\n\n***--- vector SWAP 1 ITER. TYPE: " << define_type(what_type()) << RESET << std::endl;
+std::cout << YELLOW << "\n\n***--- vector SWAP. TYPE: " << define_type(what_type()) << RESET << std::endl;
 
 	std::vector<T> stl;
 	ft::vector<T> ftl;
@@ -1039,7 +1085,7 @@ void	test_reserve_()
 	sz = bar.capacity();
 	bar.reserve(100);	 // this is the only difference with foo above
 	std::cout << "--- making bar grow:\n";
-	for (int i=0; i<100; ++i) {
+	for (int i=0; i<101; ++i) {
 		bar.push_back(i);
 		if (sz!=bar.capacity()) {
 			sz = bar.capacity();
@@ -1052,8 +1098,8 @@ void	test_reserve_()
 void	test_reserve()
 {
 std::cout << YELLOW << "\n\n***--- vector: RESERVE" << RESET << std::endl;
-	test_reserve_<std::vector<int>>();
-	test_reserve_<ft::vector<int>>();
+	test_reserve_<std::vector<int> >();
+	test_reserve_<ft::vector<int> >();
 }
 
 template <typename T>
@@ -1087,8 +1133,8 @@ void	test_sqbrackets_at_()
 void	test_sqbrackets_at()
 {
 std::cout << YELLOW << "\n\n***--- vector: OPERATOR [] vs vector.at()" << RESET << std::endl;
-	test_sqbrackets_at_<std::vector<int>>();
-	test_sqbrackets_at_<ft::vector<int>>();
+	test_sqbrackets_at_<std::vector<int> >();
+	test_sqbrackets_at_<ft::vector<int> >();
 }
 
 int main()
