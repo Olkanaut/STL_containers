@@ -1,7 +1,12 @@
 #pragma once
 
 #include <iostream>
-# include "list.h"
+
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define FUXIA "\033[35m"
+# define BLUE "\033[36m"
+# define RESET "\033[0m"
 
 namespace ft
 {
@@ -22,7 +27,6 @@ namespace ft
 		typedef true_type type;
 	};
 
-
 	struct str_type {};
 	struct notstr_type {};
 
@@ -39,7 +43,6 @@ namespace ft
 		// enum { value = 1 };
 		typedef str_type type;
 	};
-
 
 	struct int_type {};
 	struct char_type {};

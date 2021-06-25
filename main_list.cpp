@@ -2,15 +2,7 @@
 #include <list>
 #include <vector>
 #include <cmath>
-
 #include "list.h"
-#include "utils.h"
-
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define FUXIA "\033[35m"
-# define BLUE "\033[36m"
-# define RESET "\033[0m"
 
 template< typename T >
 void	print_cont(T &cont)
@@ -512,19 +504,6 @@ std::cout << "\n***------------------------- 1.2 list: INSERT at begin pos" << s
 	ft_1.insert(ft_it0, 35);
 	print_cont(ft_1);
 
-// std::cout << "\n***------------------------- 1.1 list: INSERT at begin-- pos" << std::endl;
-// 	typename std::list<T>::iterator std_it00 = std_1.begin();
-// 	for (int i = 0; i < 11 ; i++)
-// 		std_it00--;
-// 	std_1.insert(std_it00, -5);
-// 	print_cont(std_1);
-
-// 	typename ft::list<T>::iterator ft_it00 = ft_1.begin();
-// 	for (int i = 0; i < 11 ; i++)
-// 		std_it00--;
-// 	ft_1.insert(ft_it00, -5);
-// 	print_cont(ft_1);
-
 std::cout << "\n***------------------------- 1.3 list: INSERT at end pos" << std::endl;
 	typename std::list<T>::iterator std_it_end = std_1.end();
 	std_1.insert(std_it_end, 39);
@@ -533,26 +512,6 @@ std::cout << "\n***------------------------- 1.3 list: INSERT at end pos" << std
 	typename ft::list<T>::iterator ft_it_end = ft_1.end();
 	ft_1.insert(ft_it_end, 39);
 	print_cont(ft_1);
-
-// // std::cout << "\n***------------------------- 1.1 list: INSERT at end++ pos" << std::endl;
-// // 	std_it_end++;
-// // 	ft_it_end++;
-// // 	std_1.insert(std_it_end, 9);
-// // 	print_cont(std_1);
-// // 	ft_1.insert(ft_it_end, 9);
-// // 	print_cont(ft_1);
-// 	// std::list<T> std_11;
-// 	// fill_list(std_11, 3);
-// 	// ft::list<T> ft_11;
-// 	// fill_list(ft_11, 3);
-// 	// typename std::list<T>::iterator std_it_end1 = std_11.end();
-// 	// typename ft::list<T>::iterator ft_it_end1 = ft_11.end();
-// 	// // std_it_end1++;
-// 	// // ft_it_end1++;
-// 	// std_11.insert(std_it_end1, 9);
-// 	// print_cont(std_11);
-// 	// ft_11.insert(ft_it_end1, 9);
-// 	// print_cont(ft_11);
 }
 
 template < typename T, typename Type >
@@ -593,19 +552,19 @@ std::cout << YELLOW << "\n\n***--- LIST RANGE 2 ITERS. TYPE: " << define_type(wh
 
 	std::cout << "\n***------------------------- one elem in dest" << std::endl;
 	list_insert_range<std::list<T>, T>(5, 1);
-	list_insert_range<ft::list<T>, T>(5, 1);//
+	list_insert_range<ft::list<T>, T>(5, 1);
 
 	std::cout << "\n***------------------------- source is empty" << std::endl;
 	list_insert_range<std::list<T>, T>(0, 4);
 	list_insert_range<ft::list<T>, T>(0, 4);
 
 	std::cout << "\n***------------------------- dest is empty, insert 1 node" << std::endl;
-	list_insert_range<std::list<T>, T>(3, 0);//
-	list_insert_range<ft::list<T>, T>(3, 0);//differs
+	list_insert_range<std::list<T>, T>(3, 0);
+	list_insert_range<ft::list<T>, T>(3, 0);
 
 	std::cout << "\n***------------------------- dest is empty, insert >1 nodes" << std::endl;
-	list_insert_range<std::list<T>, T>(5, 0);//
-	list_insert_range<ft::list<T>, T>(5, 0);//
+	list_insert_range<std::list<T>, T>(5, 0);
+	list_insert_range<ft::list<T>, T>(5, 0);
 }
 
 template < typename T >
@@ -695,19 +654,13 @@ void	test_erase_(int delta)
 	++it1;
 
 	std::cout << "before: " << "it1: " << *it1 << "\tit2: " << *it2 << std::endl;
+	it1 = mylist.erase (it1, it2);
+	print_cont(mylist);
+	std::cout << "after:  it1: " << *it1 << "\tit2: " << *it2 << std::endl;
+
 	it1 = mylist.erase (it1);
-	it2 = mylist.erase (it2);
-	std::cout << "after:  it1: " << *it1 << "\tit2: " << *it2 << std::endl;
 	print_cont(mylist);
-
-	++it1;
-	--it2;
-
-	std::cout << "before: " << "it1: " << *it1 << "\tit2: " << *it2 << std::endl;
-	mylist.erase (it1,it2);
-	std::cout << "after:  it1: " << *it1 << "\tit2: " << *it2 << std::endl;
-	print_cont(mylist);
-	std::cout << "\n";
+	std::cout << "\n\n";
 }
 
 template <typename T>
@@ -715,23 +668,17 @@ void	test_erase()
 {
 	typedef typename ft::what_type<T>::type what_type;
 std::cout << YELLOW << "\n\n***--- LIST ERASE 1 ITER. TYPE: " << define_type(what_type()) << RESET << std::endl;
-
-	// std::cout << "\n***------------------------- normal range" << std::endl;
 	std::list<T> stl;
 	ft::list<T> ftl;
-	test_erase_<std::list<T> >(7);
-	test_erase_<ft::list<T> >(7);
-
-	// std::cout << "\n***------------------------- strange range" << std::endl;
-	// test_erase_<std::list<T> >(15);
-	// test_erase_<ft::list<T> >(15);
+	test_erase_<std::list<T> >(5);
+	test_erase_<ft::list<T> >(5);
 }
 
 template <typename T>
 void	test_swap_()
 {
-	T first (3,33);	 // three ints with a value of 100
-	T second (5,111);	// five ints with a value of 200
+	T first (3,33);
+	T second (5,111);
 
 	first.swap(second);
 

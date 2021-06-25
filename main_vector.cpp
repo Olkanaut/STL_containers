@@ -1,19 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include <iterator>//
-#include <limits>//
+#include <limits>
 
-// #include "vector.h"
 #include "vector.h"
-#include "utils.h"
-#include "list_reverse_iterator.h"
-
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define FUXIA "\033[35m"
-# define BLUE "\033[36m"
-# define RESET "\033[0m"
 
 template< typename T >
 void	print_cont(T &cont)
@@ -143,17 +133,15 @@ void	fill_vector(ft::vector<T> & vector, int num)
 
 void	fill_vector(ft::vector<temp> & vector, int num)
 {
-	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < num; i++)
 		vector.push_back(array[i]);
 }
 
 void	fill_vector(std::vector<temp> & vector, int num)
 {
-	(void)num;
 	temp array[] = {temp(1, "aaa"), temp(2, "bbb"), temp(3, "ccc")};
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < num; i++)
 		vector.push_back(array[i]);
 }
 

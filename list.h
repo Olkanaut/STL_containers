@@ -5,8 +5,7 @@
 #include <list>
 #include "utils.h"
 #include "list_node.h"
-#include "list_iterator.h"
-#include "list_reverse_iterator.h"
+#include "my_reverse_iterator.h"
 
 namespace ft
 {
@@ -14,7 +13,6 @@ template <typename T, typename Alloc = std::allocator<T> >
 class list
 {
 public:
-// Member types
 	typedef	T							value_type;
 	typedef	Alloc			allocator_type;
 
@@ -22,19 +20,15 @@ public:
 	typedef typename Alloc::const_reference		const_reference;
 	typedef typename Alloc::pointer				pointer;
 	typedef typename Alloc::const_pointer		const_pointer;
-	typedef	typename Alloc::difference_type 	difference_type;//	Signed integer type (usually std::ptrdiff_t)
+	typedef	typename Alloc::difference_type 	difference_type;
 	typedef	typename Alloc::size_type			size_type;
 
 	typedef list_iterator<T>						iterator;
 	typedef list_const_iterator<T>					const_iterator;
-	typedef list_reverse_iterator<iterator>			reverse_iterator;
-	typedef list_reverse_iterator<const_iterator>	const_reverse_iterator;
-	// typedef const list_reverse_iterator<iterator>	const_reverse_iterator;
-	// typedef List_const_reverse_iterator<const_iterator>	const_reverse_iterator;///
-	// typedef List_const_reverse_iterator<iterator>	const_reverse_iterator;///
+	typedef my_reverse_iterator<iterator>			reverse_iterator;
+	typedef my_reverse_iterator<const_iterator>	const_reverse_iterator;
 
-
-////// using iterators defined in STD
+////// * using iterators defined in STD
 	// typedef typename std::list<T>::iterator				iterator;
 	// typedef typename std::list<T>::iterator const		const_iterator;
 	// typedef std::reverse_iterator<iterator>				reverse_iterator;
@@ -42,51 +36,20 @@ public:
 
 
 private:
-	size_type		_size;// difference_type
-	Alloc			_allocator;///
+	size_type		_size;
+	Alloc			_allocator;
 
 	struct Node<T>	*_head;
-	// struct Node<T>	*_begin;
 	struct Node<T>	*_tail;
-
-	// void init_ends()
-	// {
-	// 	this->_tail = new struct Node<T>();
-	// 	// this->_head = new struct Node<T>();
-	// 	this->_tail->_prev = this->_tail;
-	// 	// this->_head->_next = this->_tail;
-	// 	this->_tail->_next = this->_tail;//->_next;
-	// 	// this->_head->_prev = this->_tail;//->_prev;
-	// 	_size = 0;//size//alloc
-	// }
-
-	// Node<T> *init_node()
-	// {
-	// 	Node<T> *new_node = new struct Node<T>();
-	// 	new_node->_next = NULL;
-	// 	new_node->_prev = NULL;
-	// 	return new_node;
-	// }
-	// Node<T> *init_node(const T & val)
-	// {
-	// 	Node<T> *new_node = new struct Node<T>(val);
-	// 	new_node->_next = NULL;
-	// 	new_node->_prev = NULL;
-	// 	return new_node;
-	// }
 
 	void init_ends()
 	{
 		this->_tail = new struct Node<T>();
 		this->_head = new struct Node<T>();
-		// this->_tail = init_node();
-		// this->_head = init_node();
 
 		this->_tail->_prev = this->_head;
 		this->_head->_next = this->_tail;
-		// this->_tail->_next = this->_head;//->_next;
-		// this->_head->_prev = this->_tail;//->_prev;
-		_size = 0;//size//alloc
+		_size = 0;
 	}
 
 	template <class InputIterator>
@@ -95,7 +58,6 @@ private:
 		init_ends();
 		while (first != last)
 		{
-			// this->push_back(first._node->_elem);
 			this->push_back(*first);
 			++first;
 		}
@@ -122,7 +84,7 @@ private:
 
 	void	assign(size_type n, const value_type & val, true_type)
 	{
-		std::cout << "redirected assign\n";
+		// std::cout << "redirected assign\n";
 		this->clear();
 		while (n-- > 0)
 			push_back(val);
@@ -134,9 +96,8 @@ private:
 		while (n)
 		{
 			insert(pos, val);
-			// pos++;//
 			n--;
-		} //if (pos == end()) pos--
+		}
 	}
 
 	template <class InputIterator>
@@ -178,13 +139,13 @@ private:
 public:
 
 	explicit list (const allocator_type & alloc = allocator_type())
-		:	_allocator(alloc)	//  _head(NULL), _tail(NULL),
+		:	_allocator(alloc)
 	{
 		init_ends();
 	};
 
 	explicit list (size_type n, const value_type & val = value_type(), const allocator_type & alloc = allocator_type())
-		:	_allocator(alloc)	//  _head(NULL), _tail(NULL),
+		:	_allocator(alloc)
 	{
 		init_ends();
 		while (_size < n)
@@ -195,7 +156,7 @@ public:
 	list (InputIterator first, InputIterator last, const allocator_type & alloc = allocator_type())
 		:	_allocator(alloc)
 	{
-		typedef typename ft::is_int<InputIterator>::type is_int;//check other types long size_t
+		typedef typename ft::is_int<InputIterator>::type is_int;
 		init(first, last, is_int());
 	};
 
@@ -205,7 +166,7 @@ public:
 		this->assign(src.begin(), src.end());
 	}
 
-	list & operator=(list const & src)//allocator, size?
+	list & operator=(list const & src)
 	{
 		if (this == & src)
 			return *this;
@@ -220,51 +181,44 @@ public:
 		delete _head;
 	};
 
-// Iterators:
+// * Iterators:
 ////// using allocators defined in STD   { return iterator(this->_M_impl._M_node._M_next); }
 // 	iterator				begin() { return iterator(reinterpret_cast<std::__detail::_List_node_base*>(_head->_next)); };// bidirectional iterator
 // 	const_iterator			begin() const { return const_iterator(reinterpret_cast<std::__detail::_List_node_base*>(_head->_next)); };//If the container is empty, the returned iterator value shall not be dereferenced.
 // 	iterator				end() { return iterator(reinterpret_cast<std::__detail::_List_node_base*>(_tail)); };
 // 	const_iterator			end() const { return const_iterator(reinterpret_cast<std::__detail::_List_node_base*>(_tail)); };
 
-	iterator				begin() { return iterator(_head->_next); };// bidirectional iterator
-	const_iterator			begin() const { return const_iterator(_head->_next); };//If the container is empty, the returned iterator value shall not be dereferenced.
-	iterator				end() { return iterator(_tail); };
-	const_iterator			end() const { return const_iterator(_tail); };
+	iterator				begin()			{ return iterator(_head->_next); };// bidirectional iterator
+	const_iterator			begin() const	{ return const_iterator(_head->_next); };//If the container is empty, the returned iterator value shall not be dereferenced.
+	iterator				end()			{ return iterator(_tail); };
+	const_iterator			end() const		{ return const_iterator(_tail); };
 
-	reverse_iterator		rbegin() { return reverse_iterator(end()); };
-	const_reverse_iterator	rbegin() const { return const_reverse_iterator(end()); };
-	reverse_iterator		rend() { return reverse_iterator(begin()); };
-	const_reverse_iterator	rend() const { return const_reverse_iterator(begin()); };
+	reverse_iterator		rbegin()		{ return reverse_iterator(end()); };
+	const_reverse_iterator	rbegin() const	{ return const_reverse_iterator(end()); };
+	reverse_iterator		rend()			{ return reverse_iterator(begin()); };
+	const_reverse_iterator	rend() const	{ return const_reverse_iterator(begin()); };
 
-
-// Capacity:
+// * Capacity:
 	bool			empty() const { return _size == 0; }
 	size_type		size() const { return _size; }
 	size_type		max_size() const { return (std::numeric_limits<difference_type>::max() / sizeof(Node<T>)); }
 
-// Element access:
-	reference		front() { return *begin(); }//Calling this function on an empty container causes undefined behavior.
+// * Element access:
+	reference		front() { return *begin(); }// * Calling this function on an empty container causes undefined behavior.
 	const_reference	front() const { return *begin(); }
 
 	reference		back()
-	{
-		// iterator tmp = end();// --tmp;// return *tmp;
-		return _tail->_prev->_elem;
-	}
+	{ return _tail->_prev->_elem; }
 
 	const_reference	back() const
-	{
-// 		iterator tmp = end();// 		--tmp;// return *tmp;
-		return _tail->_prev->_elem;
-	}
+	{ return _tail->_prev->_elem; }
 
 
-// Modifiers:
+// * Modifiers:
 	template <class InputIterator>
 	void	assign (InputIterator first, InputIterator last)
 	{
-		typedef typename ft::is_int<InputIterator>::type is_int;//check other types long size_t
+		typedef typename ft::is_int<InputIterator>::type is_int;
 		assign(first, last, is_int());
 	}
 
@@ -279,12 +233,6 @@ public:
 	void		push_front (const value_type & val)
 	{
 		insert(this->begin(), val);
-		// Node<T> *tmp = new Node<T>(val);
-		// tmp->_prev = _head;
-		// tmp->_next = _head->_next;
-		// _head->_next->_prev = tmp;
-		// _head->_next = tmp;
-		// _size++;
 	}
 
 	void		pop_front()
@@ -302,13 +250,6 @@ public:
 	void		push_back (const value_type & val)
 	{
 		this->insert(end(), val);
-		// Node<T> *tmp = new Node<T>(val);
-		// // pos->_node = reinterpret_cast<std::__detail::_List_node_base*>(tmp);
-		// tmp->_next = _tail;
-		// tmp->_prev = _tail->_prev;//
-		// _tail->_prev->_next = tmp;
-		// _tail->_prev = tmp;//
-		// _size++;
 	}
 
 	void		pop_back()
@@ -327,16 +268,12 @@ public:
 	{
 		// std::cout << "normal insert 2 args\n";
 		Node<T> *tmp = new Node<T>(val);
-		// Node<T> *tmp = init_node(val);
 		tmp->_next = pos._node;
 		tmp->_prev = pos._node->_prev;//
 		tmp->_prev->_next = tmp;//
 		tmp->_next->_prev = tmp;
 		_size++;
-		// pos++;
 		return iterator(tmp);
-		// return --pos;
-		// return pos;
 	}
 
 	void		insert(iterator pos, size_type n, const value_type & val)
@@ -346,30 +283,26 @@ public:
 		while (n)
 		{
 			insert(pos, val);
-			// pos++;//
 			n--;
 		}
 	}
 	template <class InputIterator>
 	void	insert(iterator pos, InputIterator first, InputIterator last)
 	{
-		typedef typename ft::is_int<InputIterator>::type is_int;//check other types long size_t
+		typedef typename ft::is_int<InputIterator>::type is_int;
 		insert(pos, first, last, is_int());
 	}
 
-
-
 	iterator	erase (iterator pos)
 	{
-		// iterator tmp = pos;
-		// tmp++;
-		pos._node->_prev->_next = pos._node->_next;//tmp
+		pos._node->_prev->_next = pos._node->_next;
 		pos._node->_next->_prev = pos._node->_prev;
 		iterator tmp = iterator(pos._node->_next);
 		delete pos._node;
 		_size--;
 		return tmp;
 	}
+
 	iterator	erase (iterator first, iterator last)
 	{
 		while (first != last)
@@ -521,16 +454,16 @@ public:
 		T tmp;
 		for (; it != this->end(); ++it)
 		{
-			for (iterator j = begin(); j != (ite-1); ++j)// for (iterator j = begin(); j != --ite; ++j)
-			{	// ite++;
-				if (comp(*(j+1), *(j)))// if (*j > *(j+1))
+			for (iterator j = begin(); j != (ite-1); ++j)
+			{
+				if (comp(*(j+1), *(j)))
 				{
 					tmp = *j;
 					*j = *(j+1);
 					*(j+1) = tmp;
 				}
 			}
-			--ite;//
+			--ite;
 		}
 	}
 
@@ -543,7 +476,7 @@ public:
 		size_type dist = _size / 2;
 		while (dist)
 		{
-			T tmp(*it);// T tmp(it._node->_elem);
+			T tmp(*it);
 			*it = *rit;
 			*rit = tmp;
 			it++;
@@ -551,15 +484,13 @@ public:
 			dist--;
 		}
 	}
-
-	// allocator_type get_allocator() const;
 };
 
-///// non-member overloads:
+// * non-member overloads:
 	template< class T, class Alloc >
 	bool operator==(const ft::list<T, Alloc> & x, const ft::list<T, Alloc> & y)
 	{
-		// if (x.size() != y.size()) //c++11
+		// if (x.size() != y.size())
 		// 	return false;
 		typename ft::list<T, Alloc>::const_iterator itx = x.begin();
 		typename ft::list<T, Alloc>::const_iterator ity = y.begin();

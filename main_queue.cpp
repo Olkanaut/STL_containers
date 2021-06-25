@@ -1,15 +1,7 @@
 #include <iostream>
 #include <queue>
 #include <list>
-#include <vector>
-#include "list.h"
 #include "queue.h"
-
-#define GREEN "\033[32m"
-#define YELLOW "\033[33m"
-#define FUXIA "\033[35m"
-#define BLUE "\033[36m"
-#define RESET "\033[0m"
 
 template < typename T, typename Sourse>
 void queue_constructor(Sourse vec)
